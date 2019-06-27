@@ -58,7 +58,7 @@ contract('EventTicket', function(accounts) {
             })
 
             it("tickets should only be able to be purchased when the msg.value is greater than or equal to the ticket cost", async() => {
-                await catchRevert(instance.buyTickets(1, {from: secondAccount, value: ticketPrice - 1}))
+                await catchRevert(instance.buyTickets(1, {from: secondAccount, value: ticketPrice-1}))
             })
 
             it("tickets should only be able to be purchased when there are enough remaining", async() => {
@@ -93,8 +93,9 @@ contract('EventTicket', function(accounts) {
 
                 assert.equal(postSaleAmount, (new BN(preSaleAmount).sub(new BN(ticketPrice)).sub(new BN(buyTxCost))).toString(), "overpayment should be refunded")
             })
-        })  
-        
+
+        })
+
         describe("getRefund()", async() => {
 
             it("buyers should be refunded the appropriate value amount when submitting a refund", async() => {
@@ -145,7 +146,8 @@ contract('EventTicket', function(accounts) {
                 assert.equal(postSaleAmount, (new BN(preSaleAmount).add(new BN(numberOfTickets).mul(new BN(ticketPrice))).sub(new BN(endSaleTxCost))).toString(), "contract owner should receive contract balance when closing the event")
             })
         })
-    })
+
+    })    
 })
 
 
